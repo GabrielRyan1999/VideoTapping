@@ -1,0 +1,14 @@
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class ModelVideo extends Model
+{
+    //
+    protected $table = 'video';
+    protected $fillable = [
+        'nomorinduk', 'username','status','mapel','title','judulvideo','format','deskripsi','sizevideo',
+    ];
+}
