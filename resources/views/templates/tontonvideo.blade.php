@@ -145,6 +145,19 @@
                                                 <h3>{{ $vid->title }}</h3>
 
                                                 <h4>{{ $vid->views}} Views </h4>
+
+                                                <div ng-app="Actions">
+                                                    <span ng-controller="LikeController">
+                                                        @if ($vid->nomorinduk )
+                                                        <button class="btn btn-default like btn-login"
+                                                            ng-click="like()">
+                                                            <i class="fa fa-heart"></i>
+                                                            <span>@{{ like_btn_text }}</span>
+                                                        </button>
+                                                        @endif
+                                                    </span>
+                                                </div>
+
                                                 <div class="separator">
                                                     <h4>{{ $vid->deskripsi }}</h4>
                                                 </div>
@@ -156,6 +169,36 @@
                                 </form>
                             </div>
                         </div>
+                    </div>
+                    <form action="{{url('simpanKomentar', $vid->id)}}" method="POST" enctype="multipart/form-data">
+                        {{ csrf_field() }}
+                        <div>
+                            <input type="text" class="form-control" placeholder="Apa Komentar Anda?" id="komentar"
+                                name="komentar" />
+                        </div><br><br>
+
+                        <button type="submit" class="btn btn-primary">Kirim</button>
+                    </form>
+
+                    <div>
+                        <h4>Komentar</h4>
+
+                        <!-- end of user messages -->
+                        <ul class="messages">
+                            <li>
+                                @foreach ($komen as $k)
+                                <div class="message_wrapper">
+                                    <h4 class="heading">{{ $k->nomorinduk }}</h4>
+                                    <blockquote class="message">{{ $k->body }}</blockquote>
+                                    <br />
+                                </div>
+                                @endforeach
+                            </li>
+
+                        </ul>
+                        <!-- end of user messages -->
+
+
                     </div>
                 </div>
             </div>
@@ -183,6 +226,32 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset ('assets/js/custom.min.js') }}"></script>
+
+    <script>
+    var app = angular.module("Actions", []);
+    app.controller("LikeController", function($scope, $http) {
+
+        checkLike();
+        $scope.like = function() {
+            var post = {
+                id: "{{ $vid->id }}",
+            };
+            $http.post('/post/like', post).success(function(result) {
+                checkLike();
+            });
+        };
+
+        function checkLike() {
+            $http.get('/post/{{ $vid->id }}/islikedbyme').success(function(result) {
+                if (result == 'true') {
+                    $scope.like_btn_text = "Delete Like";
+                } else {
+                    $scope.like_btn_text = "Like";
+                }
+            });
+        };
+    });
+    </script>
 </body>
 
 </html>

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\ModelVideo;
 use App\ModelUploadVideo;
+
+use App\ModelKomentar;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -59,14 +61,16 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         //
         //$vid = ModelVideo::findOrFail($id)->first();
         
-      $vid = ModelVideo::where('id',$id)->first();
+       $vid = ModelVideo::where('id',$id)->first();
+       $komen = ModelKomentar::select('nomorinduk','body')->where('video_id', $id)->get();
+
 
          //  $Key = 'video' . $id;
            //  if (!Session::has($Key)) {
             ModelVideo::where('id', $id)->increment('views',1);
     //Session::put($Key, 1);
              //}
-        return view('templates.tontonvideo')->with(compact('vid', $vid));
+        return view('templates.tontonvideo')->with(compact('vid', $vid, 'komen', $komen));
     }
 
     /**
@@ -178,4 +182,33 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
          $vidGuru = ModelVideo::where('mapel','fisika')->where('status','Guru')->paginate(10);
          return view('templates.mapel.fisika')->with(compact('vidSiswa', 'vidGuru'));
      }
+
+     public function isLikedByMe($id)
+{
+    $post = Post::findOrFail($id)->first();
+    if (Like::whereUserId(Auth::id())->wherePostId($post->id)->exists()){
+        return 'true';
+    }
+    return 'false';
+}
+
+public function like(Post $vid)
+{
+    $existing_like = Like::withTrashed()->wherePostId($post->id)->whereUserId(Session::get(id)->first());
+
+    if (is_null($existing_like)) {
+        Like::create([
+            'video_id' => $vid->id,
+            'nomorinduk' => Session::get(id),
+        ]);
+    } else {
+        if (is_null($existing_like->deleted_at)) {
+            $existing_like->delete();
+        } else {
+            $existing_like->restore();
+        }
+    }
+    return view('templates.tontonvideo')->with(compact('video_id','nomorinduk', $vid));
+}
+
 }

@@ -112,6 +112,8 @@ Route::resource('usrctrl', 'User');
 Route::resource('videoctrl', 'UploadVideoController');
 Route::resource('videoajactrl', 'VideoController');
 Route::resource('noindukctrl', 'NomorIndukController');
+Route::resource('komentarctrl','KomentarController');
+
 Route::get('/tontonvideo/{id}','VideoController@tontonvideo');
 
 Route::get('/login', 'User@login');
@@ -127,6 +129,8 @@ Route::get('/logout', 'User@logout');
 Route::get('/upload','UploadVideoController@upload_vid');
 Route::put('/upload/proses','UploadVideoController@proses');
 
+//Route::put('/komentar/simpanKomentar','KomentarController@simpanKomentar');
+Route::post('/simpanKomentar/{id}', 'KomentarController@simpanKomentar');
 Route::post('/user/updatepass','User@updatePass');
 Auth::routes();
 
@@ -138,5 +142,7 @@ Route::post('/registerPost', 'User@RegisterPost');
 Route::post('/cekNIS', 'NomorIndukController@cekNIS');
 Route::post('/cekNIP', 'NomorIndukController@cekNIP');
 
+Route::get('/post/{id}/islikedbyme', 'VideoController@isLikedByMe');
+Route::post('/post/like', 'VideoController@like');
 
 //Route::post('/deleteUser', 'User@deleteUser');

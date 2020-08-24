@@ -11,4 +11,9 @@ class ModelVideo extends Model
     protected $fillable = [
         'nomorinduk', 'username','status','mapel','title','judulvideo','format','deskripsi','sizevideo',
     ];
+
+    public function likes()
+{
+    return $this->belongsToMany('App\ModelUser', 'likes');
+}
 }
