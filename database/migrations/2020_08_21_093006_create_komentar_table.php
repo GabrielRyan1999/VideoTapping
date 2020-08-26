@@ -18,6 +18,7 @@ class CreateKomentarTable extends Migration
             $table->integer('video_id');
             $table->integer('nomorinduk');
             $table->text('body');
+            $table->string('avatar');
             $table->timestamps();
         });
     }

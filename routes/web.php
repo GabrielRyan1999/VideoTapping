@@ -25,6 +25,8 @@ Route::get('/upload', function () {
 
 Route::get('/gallery', 'VideoController@gallery');
 
+
+Route::get('/logout', 'User@logout');
 Route::get('/', function(){
     return view('templates.login');
 });
@@ -121,6 +123,23 @@ Route::post('/loginPost', 'User@loginPost')->name('login');
 Route::get('/loginAdmin', 'User@loginAdmin');
 Route::post('/loginAdminPost', 'User@loginAdminPost');
 
+Route::get('/defaultadmin', function(){
+   return view('admin.defaultadmin');
+});
+Route::get('/uploadadmin', function(){
+   return view('admin.uploadAdmin');
+});
+Route::get('/galleryadmin', function(){
+   return view('admin.galleryAdmin');
+});
+Route::get('/profileadmin', function(){
+   return view('admin.profileAdmin');
+});
+Route::get('/tontonvideoadmin', function(){
+   return view('admin.tontonvideoAdmin');
+});
+
+
 Route::get('/logout', 'User@logout');
 //Route::get('/home', 'User@index');
 
@@ -146,3 +165,5 @@ Route::get('/post/{id}/islikedbyme', 'VideoController@isLikedByMe');
 Route::post('/post/like', 'VideoController@like');
 
 //Route::post('/deleteUser', 'User@deleteUser');
+
+Route::get('/reply/like/{id}', 'VideoController@like');

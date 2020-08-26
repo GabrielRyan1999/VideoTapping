@@ -92,17 +92,21 @@ class KomentarController extends Controller
        //$vid = ModelVideo::where('id',$id)->first();
        
       $vid = ModelVideo::where('id',$id)->first();
-      
-      $komen = ModelKomentar::select('nomorinduk','body')->where('video_id', $id)->get();
+      //$avatar = ModelUser::select('avatar')->where('nomorinduk',$noinduk)->get();
+      $komen = ModelKomentar::where('video_id', $id)->get();
 
       
        $noinduk = Session::get('nomorinduk');
        $komentar=$request->input('komentar');
+        
+            ModelVideo::where('id', $id)->decrement('views',1);
+      $avatar = Session::get('avatar');
 
       $masuk = new ModelKomentar();
       $masuk->video_id=$id;
       $masuk->nomorinduk=$noinduk;
       $masuk->body=$komentar;
+      $masuk->avatar=$avatar;
       $masuk->save();
 return redirect()->back()->with(compact('vid', $vid,'komen',$komen));
         //return redirect()->back();

@@ -15,8 +15,8 @@ class CreateLikeTable extends Migration
     {
         Schema::create('Like', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('video_id');
-            $table->integer('nomorinduk');
+            $table->integer('video_id')->unsigned();
+            $table->integer('nomorinduk')->unsigned();
             $table->softDeletes();
             $table->timestamps();
         });

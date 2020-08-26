@@ -39,7 +39,7 @@ class NomorIndukController extends Controller
      public function update(Request $request, $id)
     {
       $passbaru=$request->pass;
-     $psw=ModelUser::where('id', $id)->update(['password' => $passbaru]);
+      ModelUser::where('id', $id)->update(['password' => $passbaru]);
       
         return redirect()->back();
     }

@@ -28,7 +28,7 @@ class User extends Controller
     }
 
     public function loginAdmin(){
-        return view('templates.loginAdmin');
+        return view('admin.loginAdmin');
     }
 
     public function loginAdminPost(Request $request) {
@@ -67,7 +67,6 @@ class User extends Controller
         $name = $request->name;
         $status = $request->status;
         $avatar = $request->avatar;
-        $admin="admin";
 
         $data = ModelUser::where('nomorinduk', $nomorinduk)->first();
           if ($data) { //apakah Nomor Induk tersebut ada atau tidak
@@ -94,7 +93,7 @@ class User extends Controller
     public function logout()
     {
         Session::flush();
-        return redirect('login')->with('alert', 'Kamu sudah logout');
+        return redirect('/')->with('alert', 'Kamu sudah logout');
     }
 
     public function Register(Request $request)

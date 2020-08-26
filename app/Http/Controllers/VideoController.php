@@ -7,6 +7,7 @@ use App\ModelVideo;
 use App\ModelUploadVideo;
 
 use App\ModelKomentar;
+use App\Like;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
@@ -108,9 +109,13 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         return redirect()->back();
     }
     public function gallery(){
-       // $vid=  ModelVideo::get();
         $vid = ModelVideo::get()->where('nomorinduk', Session::get('nomorinduk'));
         return view('templates.gallery')->with(compact('vid'));
+    }
+
+    public function galleryAdmin(){
+        $vid = ModelVideo::get()->where('nomorinduk', Session::get('nomorinduk'));
+        return view('admin.galleryadmin')->with(compact('vid'));
     }
 
     //public function tontonvideo($id){
@@ -183,32 +188,18 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
          return view('templates.mapel.fisika')->with(compact('vidSiswa', 'vidGuru'));
      }
 
-     public function isLikedByMe($id)
-{
-    $post = Post::findOrFail($id)->first();
-    if (Like::whereUserId(Auth::id())->wherePostId($post->id)->exists()){
-        return 'true';
-    }
-    return 'false';
-}
-
-public function like(Post $vid)
-{
-    $existing_like = Like::withTrashed()->wherePostId($post->id)->whereUserId(Session::get(id)->first());
-
-    if (is_null($existing_like)) {
-        Like::create([
-            'video_id' => $vid->id,
-            'nomorinduk' => Session::get(id),
-        ]);
-    } else {
-        if (is_null($existing_like->deleted_at)) {
-            $existing_like->delete();
-        } else {
-            $existing_like->restore();
+     public function like(request $request, $id){
+        $video = ModelVideo::where('id',$id)->get();
+        $likecheck = like::where(['nomorinduk'=>Session::get('nomorinduk'),'video_id'=>$request->id])->first();
+        if ($likecheck){
+            like::where(['nomorinduk'=>Session::get('nomorinduk'), 'video_id'=>$request->id])->delete();
+            return 'deleted';
+        }else{
+        $like = new like;
+        $lke->nomorinduk = Session::get('id');
+        $like->video_id = $request->id;
+        $like ->save();
         }
-    }
-    return view('templates.tontonvideo')->with(compact('video_id','nomorinduk', $vid));
-}
+     }
 
 }

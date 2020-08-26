@@ -159,7 +159,7 @@
 
                                     <div class="row">
                                         @foreach($vidGuru as $video)
-                                        <div class="col-md-55">
+                                        <div class="col-md-6 col-sm-6">
 
                                             <h3 style="text-align:center;"> {{ $video->title }}</h3>
                                             <div id='videoplayer'>
