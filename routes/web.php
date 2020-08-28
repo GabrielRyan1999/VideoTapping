@@ -105,6 +105,8 @@ Route::get('/search','UploadVideoController@search');
 //Route::get('/profile', 'User@show_profile');
 
 Route::get('/foto','User@uploads_pic');
+
+Route::get('/editpass','NomorIndukController@updatePass');
 // Route::put('/foto/upload/','User@update_avatar');
 //Route::put('/foto/upload/{id}', 'User@update_avatar');
 
@@ -148,9 +150,10 @@ Route::get('/logout', 'User@logout');
 Route::get('/upload','UploadVideoController@upload_vid');
 Route::put('/upload/proses','UploadVideoController@proses');
 
+Route::put('/updatePass/{id}','NomorIndukController@updatePass');
 //Route::put('/komentar/simpanKomentar','KomentarController@simpanKomentar');
 Route::post('/simpanKomentar/{id}', 'KomentarController@simpanKomentar');
-Route::post('/user/updatepass','User@updatePass');
+//Route::post('/user/updatepass','User@updatePass');
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
@@ -167,3 +170,5 @@ Route::post('/post/like', 'VideoController@like');
 //Route::post('/deleteUser', 'User@deleteUser');
 
 Route::get('/reply/like/{id}', 'VideoController@like');
+
+//Route::get('/editpass','User@updatePass');

@@ -108,6 +108,11 @@
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="javascript:;"> Profile</a>
+                                    <a class="dropdown-item" href="javascript:;">
+                                        <span class="badge bg-red pull-right">50%</span>
+                                        <span>Settings</span>
+                                    </a>
+                                    <a class="dropdown-item" href="javascript:;">Help</a>
                                     <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i> Log
                                         Out</a>
                                 </div>
@@ -119,97 +124,78 @@
 
             <!-- page content -->
             <div class="right_col" role="main">
-
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Nonton Video</h3>
+                            <h3>Edit Password User</h3>
                         </div>
 
+                        <div class="title_right">
+                            <div class="col-md-5 col-sm-5  form-group pull-right top_search">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" placeholder="Search for...">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-secondary" type="button">Go!</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="clearfix"></div>
+
                     <div class="row">
                         <div class="col-md-12 col-sm-12 ">
-                            <div class="x_panel">
-                                <form action="{{ route('videoajactrl.show', $vid->id)}}" method="POST"
-                                    enctype="multipart/form-data">
-                                    <div class="x_content">
 
-                                        <div class="col-md-12 col-sm-12 ">
-                                            <div id='videoplayer'>
-                                                <video width="80%" controlsList="nodownload" controls autoplay
-                                                    class=”afterglow” id="myvideo" width="1280" height="720">
-                                                    <source src="{{asset('/assets/videos/'.$vid->judulvideo) }}"
-                                                        type="video/mp4">
-                                                </video>
-                                                <h3>{{ $vid->title }}</h3>
+                            <div class="form-group">
+                                <label class="col-form-label">ID User</label>
+                                <input type="text" name="modal-input-id" class="form-control" value="{{$newpass->id}}"
+                                    READONLY>
 
-                                                <h4>{{ $vid->views}} Views </h4>
-
-                                            </div>
-                                        </div>
-                                        <div ng-app="Actions">
-                                            <span ng-controller="LikeController">
-                                            </span>
-                                        </div>
-
-                                        <div class="separator">
-                                            <h4>{{ $vid->deskripsi }}</h4>
-                                        </div>
-                                        <br>
-                                    </div>
                             </div>
 
-                        </div>
-                        </form>
-                    </div>
-                    <form action="{{url('simpanKomentar', $vid->id)}}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div>
-                            <input type="text" class="form-control" placeholder="Apa Komentar Anda?" id="komentar"
-                                name="komentar" />
-                        </div><br><br>
 
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-                    </form>
+                            <div class="form-group">
+                                <label class="col-form-label">Nama</label>
+                                <input type="text" name="modal-input-name" class="form-control"
+                                    value="{{$newpass->name}}" READONLY>
 
-                    <div>
+                            </div>
 
-                        <!-- end of user messages -->
-                        <ul class="messages">
-                            <li>
-                                @foreach ($komen as $k)
-                                <!-- <img src="{{asset('/uploads/avatars/'.$k->avatar) }}" class="avatar"
-                                            alt="Avatar"> -->
-                                <div class="message_wrapper">
-                                    <h3>{{ $k->nomorinduk }}</h3>
-                                    <h4>{{ date('d M Y')   }}</h4>
-                                    <blockquote class="message">{{ $k->body }}</blockquote>
-                                    <br />
+
+                            <form action="{{ route('noindukctrl.show', $newpass->id)}}" method="POST"
+                                enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <div class="form-group">
+                                    <label class="col-form-label">Password Baru</label>
+                                    <input type="password" class="form-control" placeholder="Password Baru"
+                                        id="password" name="password" />
                                 </div>
-                                @endforeach
-                            </li>
+                                <br>
+                                <button type="submit" class="pull-right btn btn-sm btn-primary">
+                                    UPDATE
+                                </button>
 
-                        </ul>
-                        <!-- end of user messages -->
 
+                            </form>
+
+
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- /page content -->
+            <!-- /page content -->
 
-    <!-- footer content -->
-    <footer>
-        <div class="pull-right">
-            SMA Kolese De Britto Yogyakarta</a>
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SMA Kolese DeBritto Yogyakarta</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
         </div>
-        <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
-    </div>
     </div>
 
     <!-- jQuery -->
@@ -220,32 +206,18 @@
     <script src="{{asset ('assets/vendors/fastclick/lib/fastclick.js') }}"></script>
     <!-- NProgress -->
     <script src="{{asset ('assets/vendors/nprogress/nprogress.js') }}"></script>
+    <!-- morris.js -->
+    <script src="{{asset ('assets/vendors/raphael/raphael.min.js') }}"></script>
+    <script src="{{asset ('assets/vendors/morris.js/morris.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{asset ('assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{asset ('assets/vendors/moment/min/moment.min.js') }}"></script>
+    <script src="{{asset ('assets/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset ('assets/js/custom.min.js') }}"></script>
-    <script type=”text/javascript” src=”//cdn.jsdelivr.net/afterglow/latest/afterglow.min.js”></script>
 
-    <script type="text/javascript">
-    $(document).ready(function() {
-
-        //Disable cut copy paste
-
-        $(document).bind('cut copy paste', function(e) {
-
-            e.preventDefault();
-
-        });
-
-        //Disable mouse right click
-
-        $(document).on("contextmenu", function(e) {
-
-            return false;
-
-        });
-
-    });
-    </script>
 </body>
 
 </html>

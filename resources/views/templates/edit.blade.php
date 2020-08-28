@@ -32,6 +32,7 @@
 
     <!-- Custom Theme Style -->
     <link href="{{ asset('assets/css/custom.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
 </head>
 
 <body class="nav-md">
@@ -67,7 +68,6 @@
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/home">Mata Pelajaran</a></li>
-                                        <li><a href="/edit">Kelola User</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
@@ -78,7 +78,8 @@
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
+
+                                        <li><a href="/edit">Kelola User</a></li>
                                     </ul>
                                 </li>
                         </div>
@@ -147,37 +148,44 @@
                 <!-- /page content -->
 
                 <!-- start project list -->
-                <table class="table table-striped projects">
+                <table class="table table-striped projects" id="table">
                     <thead>
                         <tr>
-                            <th style="width: 1%">ID</th>
+                            <th>Nomor</th>
+                            <th>ID User</th>
                             <th style="width: 20%">Name</th>
-                            <th>Nomor Induk</th>
+                            <th style="width: 20%">Nomor Induk</th>
                             <th>Status</th>
-                            <th style="width: 30%">Password</th>
-                            <th style="width: 5%">Ubah</th>
+                            <th>Password</th>
+                            <th style="width: 5%">Edit</th>
+                            <th style="width: 5%">Hapus</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($user as $pass=> $user)
                         <td>{{$pass +1 }}</td>
-                        <td>
-                            <a>{{ $user->name }}</a>
-                            <br />
-                        </td>
-                        <td>
-                            <a>{{ $user->nomorinduk }}</a>
-                        </td>
-                        <td>
-                            <p>{{ $user->status }}</p>
-                        </td>
-                        <td>
-                            <p>{{ $user->password }}</p>
-                        </td>
-                        <td>
 
-                            <button type="submit" class="btn btn-info btn-xs"><i class="fa fa-pencil"
-                                    data-toggle="modal" data-target="#edit-modal"></i></button>
+                        <td>
+                            {{ $user->id }}
+
+                        </td>
+                        <td>
+                            {{ $user->name }}
+
+                        </td>
+                        <td>
+                            {{ $user->nomorinduk }}
+                        </td>
+                        <td>
+                            {{ $user->status }}
+                        </td>
+                        <td>
+                            {{ $user->password }}
+                        </td>
+                        <td class="align-middle">
+                            <a href="{{ route('noindukctrl.update', $user->id)}}" class="btn btn-info btn-xs"><i
+                                    class="fa fa-pencil"></i></a>
+
                         </td>
                         <td>
                             <form action="{{ route('usrctrl.destroy', $user->id) }}" method="POST">
@@ -199,39 +207,6 @@
 
 
 
-            <div class="modal fade" id="edit-modal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            <h4 class="modal-title"><b>Edit User</b></h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <form role="form" action="{{ route('noindukctrl.update', $user->id)}}" method="post"
-                                enctype="multipart/form-data">
-                                {{ csrf_field() }}
-                                {{ method_field('PUT') }}
-                                <div class="box-body">
-                                    <div class="form-group">
-                                        <label for="UbahPassword">Change Password</label>
-                                        <input type="password" class="form-control" name="pass"
-                                            placeholder="Enter password">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default pull-left"
-                                        data-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">
-                                        Save changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
 
 
@@ -287,6 +262,15 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('assets/js/custom.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+
+
+    <script>
+    $(document).ready(function() {
+        $('#table').DataTable();
+    });
+    </script>
 
 </body>
 

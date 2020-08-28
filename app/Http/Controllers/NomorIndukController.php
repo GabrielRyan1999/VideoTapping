@@ -35,12 +35,19 @@ class NomorIndukController extends Controller
             return redirect()->back();
         }
     }
+
+     public function show($id)
+    {
+        $newpass = ModelUser::findOrFail($id);
+        return view('templates.editpass')->with(compact('newpass', $newpass));
+    }
     
      public function update(Request $request, $id)
     {
-      $passbaru=$request->pass;
-      ModelUser::where('id', $id)->update(['password' => $passbaru]);
+        
+      $passbaru=$request->password;
+      $passnew=ModelUser::where('id', $id)->update(['password' => $passbaru]);
       
-        return redirect()->back();
+       return redirect('/edit');
     }
 }
