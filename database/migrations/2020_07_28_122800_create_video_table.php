@@ -22,7 +22,7 @@ class CreateVideoTable extends Migration
             $table->string('title');
             $table->string('judulvideo');
             $table->string('format');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->string('sizevideo');
             $table->string('thumbnail');
             $table->integer('views')->default('0');

@@ -8,10 +8,15 @@ class ModelUser extends Model
 {
     //
     protected $table = 'users';
-    protected $fillable = ['avatar','email'];
+    protected $fillable = ['name','nomorinduk','status','avatar','password'];
 
       public function likes()
 {
     return $this->belongsToMany('App\ModelVideo', 'likes', 'video_id', 'nomorinduk');
 }
+
+public function komentar()
+  {
+      return $this->hasMany('App\ModelKomentar');
+  }
 }

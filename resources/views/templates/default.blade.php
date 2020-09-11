@@ -40,7 +40,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/home" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
+                        <a href="/defaultUser" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
                                 style="width:50px"> <span style="font-size:70%">SMA Kolese De Britto</span></a>
                     </div>
                     <div class="clearfix"></div>
@@ -66,41 +66,23 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/home">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/upload">Form Upload Video</a></li>
+                                        <li><a href="/formupload">Form Upload Video</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
                         </div>
 
                     </div>
                     <!-- /sidebar menu -->
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -119,10 +101,12 @@
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/profile"> Profile</a>
-                                    <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i> Log
-                                        Out</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
                                 </div>
                             </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <!-- /top navigation -->
@@ -157,239 +141,35 @@
 
                 <!-- /page content -->
 
-                <div class="card-columns">
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <a href="/agama">
-                                    <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                </a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="/agama"> Agama</a></h5>
+                <div class="row">
+                    @foreach($mapel as $mp)
+
+                    <div class="col-md-4">
+                        <div class="card bg-light">
+                            <div class="card-body text-center">
+                                <div class="card text-center">
+                                    <a href="{{ route('mapelctrl.show', $mp->namamatapelajaran) }}">
+                                        <img src="{{asset('/assets/'.'cover'.$mp->cover) }}" class="card-img-top">
+                                    </a>
+                                    <div class="card-body">
+                                        <h5 class="card-title">
+                                            <a href="{{ route('mapelctrl.show', $mp->namamatapelajaran) }}">
+                                                {{$mp->namamatapelajaran}}</a>
+                                        </h5>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <br>
                     </div>
 
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <a href="/antropologi">
-                                    <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="/antropologi">Antropologi</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <a href="/indo">
-                                    <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top"></a>
-                                <div class="card-body">
-                                    <h5 class="card-title"><a href="/indo">Bahasa Indonesia</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Bahasa Inggris</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Biologi</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Bimbingan Konseling</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card-columns">
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Ekonomi</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Fisika</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Geografi</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Jerman</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Kimia</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Mandarin</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-                <div class="card-columns">
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Matematika</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pendidikan Jasmani</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Pendidikan Nilai</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Perancis</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">PKN</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">PKWU</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-columns">
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Sejarah</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Seni Rupa</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card bg-light">
-                        <div class="card-body text-center">
-                            <div class="card text-center">
-                                <img src="{{asset ('assets/images/Agama.jpg') }}" class="card-img-top">
-                                <div class="card-body">
-                                    <h5 class="card-title">Sosiologi</h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    SMA Kolese DeBritto Yogyakarta</a>
+                    SMA Kolese De Britto Yogyakarta</a>
                 </div>
                 <div class="clearfix"></div>
             </footer>

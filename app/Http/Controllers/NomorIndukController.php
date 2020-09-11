@@ -45,9 +45,28 @@ class NomorIndukController extends Controller
      public function update(Request $request, $id)
     {
         
-      $passbaru=$request->password;
+       $passbaru=$request->password;
       $passnew=ModelUser::where('id', $id)->update(['password' => $passbaru]);
       
        return redirect('/edit');
     }
+
+    public function store(request $request){
+        $nama = $request->nama;
+        $noinduk = $request->noinduk;
+        $status = $request->status;
+        $password = $request->password;
+        $avatar = "default.png";
+
+        $user = new ModelUser();
+        $user->name=$nama;
+        $user->nomorinduk= $noinduk;
+        $user->status= $status;
+        $user->avatar = $avatar;
+        $user->password = $password;
+        $user->save();
+
+        return redirect('/edit')->with('success', 'User Added Successfully');
+    }
+     
 }

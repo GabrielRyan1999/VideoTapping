@@ -5006,7 +5006,10 @@ ul.project_files li a i {
 }
 
 .login {
-	background: #F7F7F7
+	background: url("login_back.JPG");
+	background-size: cover;
+	background-repeat: no-repeat;
+
 }
 
 .login .fa-paw {

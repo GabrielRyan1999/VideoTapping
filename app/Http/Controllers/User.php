@@ -7,24 +7,30 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Crypt;
 use Auth;
 use Image;
+use App\ModelMataPelajaran;
 
+use App\ModelKomentar;
+use App\Imports\UserImport;
+
+use Maatwebsite\Excel\Facades\Excel;
 
 class User extends Controller
 {
     //
     public function index()
     {
-        if (!Session::get('/login')) {
-            return redirect('/login')->with('alert', 'Login dulu');
-        } else {
-            return view('/home');
-        }
+         $mapel = ModelMataPelajaran::orderBy('namamatapelajaran', 'asc')->get();
+       
+       
+        return view('templates.default')->with(compact('mapel', $mapel));
+   
     }
-    public function login()
+    public function loginUser()
     {
-        return redirect('/login');
+        return redirect('/defaultUser');
     }
 
     public function loginAdmin(){
@@ -59,7 +65,7 @@ class User extends Controller
         }
     }
     
-    public function loginPost(Request $request)
+    public function loginUserPost(Request $request)
     {
 
         $nomorinduk = $request->nomorinduk;
@@ -70,7 +76,7 @@ class User extends Controller
 
         $data = ModelUser::where('nomorinduk', $nomorinduk)->first();
           if ($data) { //apakah Nomor Induk tersebut ada atau tidak
-            if (Hash::check($password, $data->password)) {
+            if ($password=== $data->password) {
                 Session::put('id', $data->id);
                 Session::put('name', $data->name);
                 
@@ -78,7 +84,7 @@ class User extends Controller
                 Session::put('nomorinduk', $data->nomorinduk);
                 Session::put('avatar', $data->avatar);
                 Session::put('login', TRUE);
-                return redirect('/home');
+                return redirect('/defaultUser');
             } else {
                 return redirect()->back()->with('alert', 'Password Salah !');
             }
@@ -160,6 +166,8 @@ class User extends Controller
             $usrs->avatar = $filename;
 
             $usrs->save();
+            
+            ModelKomentar::where('user_id', $id)->update(['avatar' => $filename]);
             Session::put('avatar', $usrs->avatar);
             // ModelUser::create(['avatar' => $filename]);
             //Image::make($avatar)->resize(300,300)->save(public_path('/uploads/avatars' . $filename));
@@ -170,7 +178,7 @@ class User extends Controller
         }
 
         //return view('templates.profile',array('user'=>Auth::user()));
-        return redirect()->back();
+        return redirect('/profile');
     }
     public function showData()
     {
@@ -185,4 +193,66 @@ class User extends Controller
         return redirect()->back();
     }
 
+    public function destroyAll()
+    {
+        ModelUser::query()->delete();
+        return redirect()->back();
+    }
+
+    public function show($id)
+    {
+      $pass = ModelUser::findOrFail($id);
+        return view('templates.editpassuser')->with(compact('pass', $pass));
+    }
+
+     public function passUser(Request $request,$id)
+    {
+       $passbaru=$request->password;
+
+      $passnew=ModelUser::where('id', $id)->update(['password' => $passbaru]);
+      
+       return redirect('/profile');
+    }
+
+    public function import_view(){
+        $data = ModelUser::all();
+        return view('templates.import')->with(compact('data'));
+    }
+    
+public function import_excel(Request $request) 
+	{
+		// validasi
+		$this->validate($request, [
+			'file' => 'required|mimes:csv,xls,xlsx'
+		]);
+ 
+		// menangkap file excel
+        $file = $request->file('file');
+        
+        if(empty($file)){
+            return redirect()->back()->with('alert-aq', 'masukan File');
+        }else{
+// membuat nama file unik
+		$nama_file = rand().$file->getClientOriginalName();
+ 
+		// upload ke folder file_siswa di dalam folder public
+        $file->move(public_path('/file_user'), $nama_file);
+ 
+		// import data
+       Excel::import(new UserImport, public_path('/file_user/'.$nama_file));
+ 
+		// notifikasi dengan session
+		Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+		// alihkan halaman kembali
+		return redirect('/edit');
+        }
+ 
+		
+	}
+
+public function home(){
+
+        return view('templates.default');
+} 
 }

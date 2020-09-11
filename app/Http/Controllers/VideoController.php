@@ -63,7 +63,7 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         //$vid = ModelVideo::findOrFail($id)->first();
         
        $vid = ModelVideo::where('id',$id)->first();
-       $komen = ModelKomentar::select('nomorinduk','body')->where('video_id', $id)->get();
+       $komen = ModelKomentar::select('nama_user','nomorinduk','body','avatar')->where('video_id', $id)->get();
 
 
          //  $Key = 'video' . $id;
@@ -74,6 +74,23 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         return view('templates.tontonvideo')->with(compact('vid', $vid, 'komen', $komen));
     }
 
+    
+    public function showAdmin($id)
+    {
+        //
+        //$vid = ModelVideo::findOrFail($id)->first();
+        
+       $vid = ModelVideo::where('id',$id)->first();
+       $komen = ModelKomentar::select('nama_user','nomorinduk','body','avatar')->where('video_id', $id)->get();
+
+
+         //  $Key = 'video' . $id;
+           //  if (!Session::has($Key)) {
+            ModelVideo::where('id', $id)->increment('views',1);
+    //Session::put($Key, 1);
+             //}
+        return view('admin.tontonvideoAdmin')->with(compact('vid', $vid, 'komen', $komen));
+    }
     /**
      * Show the form for editing the specified resource.
      *

@@ -30,7 +30,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/home" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
+                        <a href="/defaultUser" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
                                 style="width:50px"> <span style="font-size:70%">SMA Kolese De Britto</span></a>
                     </div>
 
@@ -39,7 +39,8 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{asset ('assets/images/gmb1.jpg')}}" alt="..." class="img-circle profile_img">
+                            <img src="{{Asset ('uploads/avatars/'. Session::get('avatar') ) }}" alt="..."
+                                class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Selamat Datang,</span>
@@ -56,40 +57,23 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/home">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/upload">Form Upload Video</a></li>
+                                        <li><a href="/formupload">Form Upload Video</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
                         </div>
 
                     </div>
                     <!-- /sidebar menu -->
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
                     <!-- /menu footer buttons -->
                 </div>
             </div>
@@ -100,26 +84,22 @@
                     <div class="nav toggle">
                         <a id="menu_toggle"><i class="fa fa-bars"></i></a>
                     </div>
+
                     <nav class="nav navbar-nav">
                         <ul class=" navbar-right">
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">{{Session::get('name')}}
-                                </a>
+                                    {{ Session::get('name')}}</a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
-                                    <a class="dropdown-item" href="javascript:;">
-                                        <span class="badge bg-red pull-right">50%</span>
-                                        <span>Settings</span>
-                                    </a>
-                                    <a class="dropdown-item" href="javascript:;">Help</a>
-                                    <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i> Log
-                                        Out</a>
+                                    <a class="dropdown-item" href="/profile"> Profile</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
                                 </div>
                             </li>
-
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <!-- /top navigation -->
@@ -131,16 +111,6 @@
                         <div class="title_left">
                             <h3>Form Upload </h3>
                         </div>
-                        <!--<div class="title_right">
-                <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>-->
                     </div>
 
                     <div class="clearfix"></div>
@@ -149,45 +119,23 @@
                         <div class="col-md-12 col-sm-12  ">
                             <div class="x_panel">
                                 <div class="x_title">
-                                    <h2>Dropzone multiple file uploader</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
-                                        <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
-                                        </li>
-                                    </ul>
+                                    <h2>Video Uploader</h2>
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <p>Drag files video ke box dibawah atau pilih file video. Setelah itu pilih mata
-                                        pelajaran.</p>
-
-
-                                    <form action="/upload/proses" method="POST" enctype="multipart/form-data">
+                                    <h6>Pilih Mata Pelajaran lalu Masukan Judul Video dan Deskripsi Video, Setelah itu
+                                        pilih File Video Anda dan juga pilih Thumbnail Anda.</h6>
+                                    <br>
+                                    <form action="{{url ('/upload/proses') }}" method="POST"
+                                        enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
                                         <label for="mapel">Mata Pelajaran:</label>
                                         <select name="mapel" id="mapel">
-                                            <option value="agama">Agama</option>
-                                            <option value="antropologi">Antropologi</option>
-                                            <option value="indonesia">Bahasa Indonesia</option>
-                                            <option value="inggris">Bahasa Inggris</option>
-                                            <option value="bk">Bimbingan Konseling</option>
-                                            <option value="ekonomi">Ekonomi</option>
-                                            <option value="fisika">Fisika</option>
-                                            <option value="geografi">Geografi</option>
-                                            <option value="jerman">Jerman</option>
-                                            <option value="kimia">Kimia</option>
-                                            <option value="mandarin">Mandarin</option>
-                                            <option value="matematika">Matematika</option>
+                                            @foreach($mapel as $mata)
+                                            <option value="{{$mata->namamatapelajaran}}">{{$mata->namamatapelajaran}}
+                                            </option>
+                                            @endforeach
                                         </select>
                                         <br><br>
 
@@ -210,6 +158,13 @@
                                         </div><br><br>
                                         <button type="submit" class="btn btn-primary">Upload</button>
                                     </form>
+                                    @if(\Session::has('alert-title'))
+                                    <div class="alert alert-danger">
+                                        <div>
+                                            <h2 style="text-align:center;">{{Session::get('alert-title')}}</h2>
+                                        </div>
+                                    </div>
+                                    @endif
 
                                     <!--<form action="/upload/proses" class="dropzone" name="video" id="video" method="POST">
                             <label for="mapel">Mata Pelajaran:</label>

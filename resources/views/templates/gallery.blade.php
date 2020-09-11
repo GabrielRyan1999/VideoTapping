@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{asset ('assets/images/logo.png')}}" type="image" />
-    <title>SMA Kolese DeBritto Yogyakarta</title>
+    <title>SMA Kolese De Britto Yogyakarta</title>
 
     <!-- Bootstrap -->
     <link href="{{asset ('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -28,7 +28,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/home" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
+                        <a href="/defaultUser" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
                                 style="width:50px"> <span style="font-size:70%">SMA Kolese De Britto</span></a>
                     </div>
 
@@ -37,7 +37,8 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{asset ('assets/images/gmb1.jpg')}}" alt="..." class="img-circle profile_img">
+                            <img src="{{Asset ('uploads/avatars/'. Session::get('avatar') ) }}" alt="..."
+                                class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Selamat Datang,</span>
@@ -54,18 +55,17 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/home">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/upload">Form Upload Video</a></li>
+                                        <li><a href="/formupload">Form Upload Video</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
                         </div>
@@ -103,16 +103,16 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">{{Session::get('name')}}
-                                </a>
+                                    {{ Session::get('name')}}</a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
-                                    <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i> Log
-                                        Out</a>
+                                    <a class="dropdown-item" href="/profile"> Profile</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
                                 </div>
                             </li>
-
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <!-- /top navigation -->
@@ -123,17 +123,6 @@
                     <div class="page-title">
                         <div class="title_left">
                             <h3> Video Gallery </h3>
-                        </div>
-
-                        <div class="title_right">
-                            <div class="col-md-5 col-sm-5   form-group pull-right top_search">
-                                <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Search for...">
-                                    <span class="input-group-btn">
-                                        <button class="btn btn-default" type="button">Go!</button>
-                                    </span>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -155,50 +144,51 @@
                                             <div id='videoplayer'>
                                                 <video preload="none"
                                                     poster="{{asset('/assets/'.'thumbnail'.$video->thumbnail) }}"
-                                                    width="100%" controls>
+                                                    width="100%" controlsList="nodownload" controls>
                                                     <source src="{{asset('/assets/videos/'.$video->judulvideo) }}"
                                                         type="video/mp4">
                                                 </video>
 
-                                                <div class="caption">
-                                                    <form action="{{ route('videoajactrl.destroy', $video->id) }}"
-                                                        method="POST">
-                                                        <button type="submit" class="btn btn-danger">
-                                                            {{csrf_field()}}
-                                                            {{ method_field('DELETE') }}
-                                                            Hapus
-                                                        </button>
-                                                    </form>
-                                                    <form action="{{ route('videoajactrl.show', $video->id) }}">
-                                                        <button type="submit" class="btn btn-info">
+                                                <form action="{{ route('videoajactrl.show', $video->id) }}">
+                                                    <button type="submit" class="btn btn-info">
 
-                                                            Detail Video
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <br>
+                                                        Detail Video
+                                                    </button>
+                                                    <div class="caption">
+                                                        <form action="{{ route('videoajactrl.destroy', $video->id) }}"
+                                                            method="POST">
+                                                            <button type="submit" class="btn btn-danger">
+                                                                {{csrf_field()}}
+                                                                {{ method_field('DELETE') }}
+                                                                Hapus
+                                                            </button>
+                                                        </form>
+                                                    </div>
+                                                </form>
                                             </div>
+                                            <br>
                                         </div>
-
-                                        @endforeach
                                     </div>
+
+                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- /page content -->
-
-            <!-- footer content -->
-            <footer>
-                <div class="pull-right">
-                    SMA Kolese De Britto Yogyakarta</a>
-                </div>
-                <div class="clearfix"></div>
-            </footer>
-            <!-- /footer content -->
         </div>
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                SMA Kolese De Britto Yogyakarta</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
+    </div>
     </div>
 
     <!-- jQuery -->

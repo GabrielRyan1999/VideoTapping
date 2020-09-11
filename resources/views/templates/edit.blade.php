@@ -41,7 +41,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/home" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
+                        <a href="/defaultadmin" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
                                 style="width:50px"> <span style="font-size:70%">SMA Kolese De Britto</span></a>
                     </div>
                     <div class="clearfix"></div>
@@ -67,42 +67,21 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/home">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultadmin">Mata Pelajaran</a></li>
                                     </ul>
                                 </li>
-                                <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
+                                <li><a><i class="fa fa-edit"></i> Admin Page <span
+                                            class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/upload">Form Upload Video</a></li>
-                                    </ul>
-                                </li>
-                                <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu">
-                                        <li><a href="/gallery">Video Gallery</a></li>
-
                                         <li><a href="/edit">Kelola User</a></li>
                                     </ul>
                                 </li>
+                            </ul>
                         </div>
 
                     </div>
                     <!-- /sidebar menu -->
 
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -120,11 +99,13 @@
                                     {{ Session::get('name')}}</a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="/profile"> Profile</a>
-                                    <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i> Log
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log
                                         Out</a>
                                 </div>
                             </li>
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <!-- /top navigation -->
@@ -143,6 +124,15 @@
 
 
                 <!-- /top tiles -->
+                <br>
+                <br>
+                <br>
+                <a href="{{url ('/import') }}" class="btn btn-primary mr-5">Import Excel</a>
+                <a href="/tambahUser" class="btn btn-primary mr-5">Tambah User</a>
+
+                <a href="/destroyAll" class="btn btn-danger mr-5">Delete All Data</a>
+                <br><br>
+                <!-- Import Excel -->
 
 
                 <!-- /page content -->
@@ -151,11 +141,10 @@
                 <table class="table table-striped projects" id="table">
                     <thead>
                         <tr>
-                            <th>Nomor</th>
-                            <th>ID User</th>
+                            <th style="width: 5%">Nomor</th>
                             <th style="width: 20%">Name</th>
                             <th style="width: 20%">Nomor Induk</th>
-                            <th>Status</th>
+                            <th style="width: 10%">Status</th>
                             <th>Password</th>
                             <th style="width: 5%">Edit</th>
                             <th style="width: 5%">Hapus</th>
@@ -165,10 +154,6 @@
                         @foreach($user as $pass=> $user)
                         <td>{{$pass +1 }}</td>
 
-                        <td>
-                            {{ $user->id }}
-
-                        </td>
                         <td>
                             {{ $user->name }}
 
@@ -183,7 +168,7 @@
                             {{ $user->password }}
                         </td>
                         <td class="align-middle">
-                            <a href="{{ route('noindukctrl.update', $user->id)}}" class="btn btn-info btn-xs"><i
+                            <a href="{{ route('noindukctrl.show', $user->id)}}" class="btn btn-info btn-xs"><i
                                     class="fa fa-pencil"></i></a>
 
                         </td>

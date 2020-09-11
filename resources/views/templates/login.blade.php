@@ -43,38 +43,38 @@
                             <div>{{Session::get('alert-success')}}</div>
                         </div>
                         @endif
-                        <form action="{{ url('/loginPost')}}" method="post">
+                        <form action="{{ url('/loginUserPost')}}" method="post">
                             {{csrf_field() }}
-                            <input type="text" class="form-control" placeholder="Nomor Induk" id="nomorinduk"
-                                name="nomorinduk" />
-                    </div>
-                    <div>
-                        <input type="password" class="form-control" placeholder="Password" id="password"
-                            name="password" />
-                    </div>
-                    <br>
-                    <div>
-                        <button type="submit" class="btn btn-default submit">Login</button>
-                    </div>
-                    </form>
-                    <div class="clearfix"></div>
-                    <br>
-                    <div class="separator">
-                        <p class="change_link">Belum Punya Akun?
-                            <a href="#signup" class="to_register"> Buat Akun </a>
-                        </p>
-                        <p class="change_link">login
-                            <a href="/loginAdmin">admin</a>
-                        </p>
-
+                            <div>
+                                <input type="text" class="form-control" placeholder="Nomor Induk" id="nomorinduk"
+                                    name="nomorinduk" />
+                            </div>
+                            <div>
+                                <input type="password" class="form-control" placeholder="Password" id="password"
+                                    name="password" />
+                            </div>
+                            <br>
+                            <div>
+                                <button type="submit" class="btn btn-default submit">Login</button>
+                            </div>
+                        </form>
                         <div class="clearfix"></div>
-                        <br />
+                        <br>
+                        <div class="separator">
+                            <p class="change_link">Belum Punya Akun?
+                                <a href="#signup" class="to_register"> Buat Akun </a>
+                            </p>
+                            <p class="change_link">login
+                                <a href="/loginAdmin">admin</a>
+                            </p>
 
-                        <div>
-                            <h1>SMA Kolese De Britto Yogyakarta</h1>
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h1>SMA Kolese De Britto Yogyakarta</h1>
+                            </div>
                         </div>
-                    </div>
-                    </form>
                 </section>
             </div>
 

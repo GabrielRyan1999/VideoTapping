@@ -20,7 +20,7 @@ class CreateUploadvideoTable extends Migration
             $table->string('mapel');
             $table->string('video');
             $table->string('videoname');
-            $table->string('deskripsi');
+            $table->string('deskripsi')->nullable();
             $table->timestamps();
         });
     }

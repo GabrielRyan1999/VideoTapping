@@ -28,7 +28,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/home" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
+                        <a href="/defaultUser" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
                                 style="width:50px"> <span style="font-size:70%">SMA Kolese De Britto</span></a>
                     </div>
 
@@ -37,7 +37,8 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{asset ('assets/images/gmb1.jpg')}}" alt="..." class="img-circle profile_img">
+                            <img src="{{Asset ('uploads/avatars/'. Session::get('avatar') ) }}" alt="..."
+                                class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Selamat Datang,</span>
@@ -54,12 +55,12 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/home">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/upload">Form Upload Video</a></li>
+                                        <li><a href="/formupload">Form Upload Video</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
@@ -68,26 +69,10 @@
                                         <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
+                            </ul>
                         </div>
-
                     </div>
                     <!-- /sidebar menu -->
-
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
                     <!-- /menu footer buttons -->
                 </div>
             </div>
@@ -103,16 +88,16 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">{{Session::get('name')}}
-                                </a>
+                                    {{ Session::get('name')}}</a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="javascript:;"> Profile</a>
-                                    <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i> Log
-                                        Out</a>
+                                    <a class="dropdown-item" href="/profile"> Profile</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
                                 </div>
                             </li>
-
+                        </ul>
+                    </nav>
                 </div>
             </div>
             <!-- /top navigation -->
@@ -127,90 +112,90 @@
                         </div>
 
                     </div>
-
-                    <div class="clearfix"></div>
-                    <div class="row">
-                        <div class="col-md-12 col-sm-12 ">
-                            <div class="x_panel">
-                                <form action="{{ route('videoajactrl.show', $vid->id)}}" method="POST"
-                                    enctype="multipart/form-data">
-                                    <div class="x_content">
-
-                                        <div class="col-md-12 col-sm-12 ">
-                                            <div id='videoplayer'>
-                                                <video width="80%" controlsList="nodownload" controls autoplay
-                                                    class=”afterglow” id="myvideo" width="1280" height="720">
-                                                    <source src="{{asset('/assets/videos/'.$vid->judulvideo) }}"
-                                                        type="video/mp4">
-                                                </video>
-                                                <h3>{{ $vid->title }}</h3>
-
-                                                <h4>{{ $vid->views}} Views </h4>
-
-                                            </div>
-                                        </div>
-                                        <div ng-app="Actions">
-                                            <span ng-controller="LikeController">
-                                            </span>
-                                        </div>
-
-                                        <div class="separator">
-                                            <h4>{{ $vid->deskripsi }}</h4>
-                                        </div>
-                                        <br>
-                                    </div>
-                            </div>
-
-                        </div>
-                        </form>
-                    </div>
-                    <form action="{{url('simpanKomentar', $vid->id)}}" method="POST" enctype="multipart/form-data">
-                        {{ csrf_field() }}
-                        <div>
-                            <input type="text" class="form-control" placeholder="Apa Komentar Anda?" id="komentar"
-                                name="komentar" />
-                        </div><br><br>
-
-                        <button type="submit" class="btn btn-primary">Kirim</button>
-                    </form>
-
                     <div>
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 ">
+                                <div class="x_panel">
+                                    <form action="{{ route('videoajactrl.show', $vid->id)}}" method="POST"
+                                        enctype="multipart/form-data">
+                                        <div class="x_content">
 
-                        <!-- end of user messages -->
-                        <ul class="messages">
-                            <li>
-                                @foreach ($komen as $k)
-                                <!-- <img src="{{asset('/uploads/avatars/'.$k->avatar) }}" class="avatar"
-                                            alt="Avatar"> -->
-                                <div class="message_wrapper">
-                                    <h3>{{ $k->nomorinduk }}</h3>
-                                    <h4>{{ date('d M Y')   }}</h4>
-                                    <blockquote class="message">{{ $k->body }}</blockquote>
-                                    <br />
+                                            <div class="col-md-12 col-sm-12 ">
+                                                <div id='videoplayer'>
+                                                    <video width="80%" controlsList="nodownload" controls autoplay
+                                                        class=”afterglow” id="myvideo" width="1280" height="720">
+                                                        <source src="{{asset('/assets/videos/'.$vid->judulvideo) }}"
+                                                            type="video/mp4">
+                                                    </video>
+                                                    <h3>{{ $vid->title }}</h3>
+
+                                                    <h4>{{ $vid->views}} Views </h4>
+
+                                                </div>
+                                            </div>
+                                            <div class="separator">
+                                                <h4>{{ $vid->deskripsi }}</h4>
+                                            </div>
+                                            <br>
+                                        </div>
                                 </div>
-                                @endforeach
-                            </li>
 
-                        </ul>
-                        <!-- end of user messages -->
+                            </div>
+                            </form>
+                        </div>
+                        <form action="{{url('simpanKomentar', $vid->id)}}" method="POST" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            <div>
+                                <input type="text" class="form-control" placeholder="Apa Komentar Anda?" id="komentar"
+                                    name="komentar" />
+                            </div><br><br>
 
+                            <button type="submit" class="btn btn-primary">Kirim</button>
+                        </form>
+
+                        <div>
+
+                            <!-- end of user messages -->
+                            <ul class="messages">
+                                <li>
+                                    @foreach ($komen as $k)
+                                    <img src="{{asset('/uploads/avatars/'.$k->avatar) }}" class="avatar" alt="Avatar">
+                                    <div class="message_date">
+
+                                        <h6>{{ date('d M Y')   }}</h6>
+                                    </div>
+                                    <div class="message_wrapper">
+                                        <h4>{{ $k->nama_user }}</h4>
+                                        <blockquote class="message">{{ $k->body }}</blockquote>
+                                        <br />
+                                    </div>
+                                    @endforeach
+                                </li>
+
+                            </ul>
+
+                            <!-- end of user messages -->
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- /page content -->
 
-    <!-- footer content -->
-    <footer>
-        <div class="pull-right">
-            SMA Kolese De Britto Yogyakarta</a>
-        </div>
-        <div class="clearfix"></div>
-    </footer>
-    <!-- /footer content -->
+
+        <!-- /page content -->
+
+        <!-- footer content -->
+        <footer>
+            <div class="pull-right">
+                SMA Kolese De Britto Yogyakarta</a>
+            </div>
+            <div class="clearfix"></div>
+        </footer>
+        <!-- /footer content -->
     </div>
     </div>
+
 
     <!-- jQuery -->
     <script src="{{asset ('assets/vendors/jquery/dist/jquery.min.js') }}"></script>

@@ -28,7 +28,7 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="/home" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
+                        <a href="/defaultUser" class="site_title"><img src="{{asset ('assets/images/logo.png')}}"
                                 style="width:50px"> <span style="font-size:70%">SMA Kolese De Britto</span></a>
                     </div>
 
@@ -37,7 +37,8 @@
                     <!-- menu profile quick info -->
                     <div class="profile clearfix">
                         <div class="profile_pic">
-                            <img src="{{asset ('assets/images/gmb1.jpg')}}" alt="..." class="img-circle profile_img">
+                            <img src="{{Asset ('uploads/avatars/'. Session::get('avatar') ) }}" alt="..."
+                                class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
                             <span>Selamat Datang,</span>
@@ -54,18 +55,17 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/home">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/upload">Form Upload Video</a></li>
+                                        <li><a href="/formupload">Form Upload Video</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
                         </div>
@@ -73,22 +73,6 @@
                     </div>
                     <!-- /sidebar menu -->
 
-                    <!-- /menu footer buttons -->
-                    <div class="sidebar-footer hidden-small">
-                        <a data-toggle="tooltip" data-placement="top" title="Settings">
-                            <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="FullScreen">
-                            <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Lock">
-                            <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
-                        </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout" href="/">
-                            <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
-                        </a>
-                    </div>
-                    <!-- /menu footer buttons -->
                 </div>
             </div>
 
@@ -103,17 +87,15 @@
                             <li class="nav-item dropdown open" style="padding-left: 15px;">
                                 <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
                                     id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                    <img src="images/img.jpg" alt="">{{Session::get('name')}}
-                                </a>
+                                    {{ Session::get('name')}}</a>
                                 <div class="dropdown-menu dropdown-usermenu pull-right"
                                     aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="/profile"> Profile</a>
-                                    <a class="dropdown-item" href="/"><i class="fa fa-sign-out pull-right"></i>
-                                        Log
-                                        Out</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log Out</a>
                                 </div>
                             </li>
-
+                        </ul>
                 </div>
             </div>
             <!-- /top navigation -->
@@ -123,7 +105,8 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3> Video Agama </h3>
+
+                            <h3> {{ $mata->namamatapelajaran }}</h3>
                         </div>
 
                         <div class="title_right">
@@ -138,18 +121,8 @@
                             <div class="x_panel">
                                 <div class="x_title">
                                     <h2>List Video Guru</h2>
-                                    <ul class="nav navbar-right panel_toolbox">
+                                    <ul class="nav navbar-right panel_toolbox" style="float:left;">
                                         <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-                                                aria-expanded="false"><i class="fa fa-wrench"></i></a>
-                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                <a class="dropdown-item" href="#">Settings 1</a>
-                                                <a class="dropdown-item" href="#">Settings 2</a>
-                                            </div>
-                                        </li>
-                                        <li><a class="close-link"><i class="fa fa-close"></i></a>
                                         </li>
                                     </ul>
                                     <div class="clearfix"></div>
@@ -164,7 +137,7 @@
                                             <h3 style="text-align:center;"> {{ $video->title }}</h3>
                                             <div id='videoplayer'>
 
-                                                <video preload="none"
+                                                <video preload="none" controlsList="nodownload"
                                                     poster="{{asset('/assets/'.'thumbnail'.$video->thumbnail) }}"
                                                     width="100%" controls>
                                                     <source src="{{asset('/assets/videos/'.$video->judulvideo)}}"
@@ -192,19 +165,8 @@
                                     <div class="x_panel">
                                         <div class="x_title">
                                             <h2>List Video Siswa</h2>
-                                            <ul class="nav navbar-right panel_toolbox">
+                                            <ul class="nav navbar-right panel_toolbox" style="float:left;">
                                                 <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
-                                                </li>
-                                                <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                        role="button" aria-expanded="false"><i
-                                                            class="fa fa-wrench"></i></a>
-                                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                                        <a class="dropdown-item" href="#">Settings 1</a>
-                                                        <a class="dropdown-item" href="#">Settings 2</a>
-                                                    </div>
-                                                </li>
-                                                <li><a class="close-link"><i class="fa fa-close"></i></a>
                                                 </li>
                                             </ul>
                                             <div class="clearfix"></div>
@@ -218,7 +180,7 @@
 
                                                     <h3 style="text-align:center; color:black"> {{ $video->title }}</h3>
                                                     <div id='videoplayer'>
-                                                        <video preload="none"
+                                                        <video preload="none" controlsList="nodownload"
                                                             poster="{{asset('/assets/'.'thumbnail'.$video->thumbnail) }}"
                                                             width="100%" controls>
                                                             <source
@@ -274,6 +236,27 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset ('assets/js/custom.min.js') }}"></script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        //Disable cut copy paste
+
+        $(document).bind('cut copy paste', function(e) {
+
+            e.preventDefault();
+
+        });
+
+        //Disable mouse right click
+
+        $(document).on("contextmenu", function(e) {
+
+            return false;
+
+        });
+
+    });
+    </script>
 </body>
 
 </html>
