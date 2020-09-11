@@ -153,7 +153,7 @@
                 <!-- footer content -->
                 <footer>
                     <div class="pull-right">
-                        SMA Kolese DeBritto Yogyakarta</a>
+                        SMA Kolese De Britto Yogyakarta</a>
                     </div>
                     <div class="clearfix"></div>
                 </footer>
