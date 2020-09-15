@@ -84,13 +84,19 @@ class KomentarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        ModelKomentar::where('id',$id)->delete();
+      
+    return redirect()->back();
     }
+
+    public function deleteKomen($id){
+        ModelKomentar::where('id',$id)->delete();
+        return redirect()->back();
+    }
+
     public function simpanKomentar(Request $request, $id)
     {
           
-       //$vid = ModelVideo::where('id',$id)->first();
-       
        $noinduk = Session::get('nomorinduk');
       $vid = ModelVideo::where('id',$id)->first();
       $komen = ModelKomentar::where('video_id', $id)->get();

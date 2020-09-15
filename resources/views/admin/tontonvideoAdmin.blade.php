@@ -55,7 +55,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultadmin">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultadmin">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Admin Page <span
@@ -125,14 +125,17 @@
                                                     <source src="{{asset('/assets/videos/'.$vid->judulvideo) }}"
                                                         type="video/mp4">
                                                 </video>
+                                            </div>
+                                            <div class="separator">
                                                 <h3>{{ $vid->title }}</h3>
 
-                                                <h4>{{ $vid->views}} Views </h4>
+                                                <h4>Pengupload : {{ $vid->username}}</h4>
+                                                <h4>Kategori : {{ $vid->mapel}}</h4>
 
+                                                <h4>Deskripsi Video : {{ $vid->deskripsi }}</h4>
+
+                                                <h4>{{ $vid->views}} Views </h4>
                                             </div>
-                                        </div>
-                                        <div class="separator">
-                                            <h4>{{ $vid->deskripsi }}</h4>
                                         </div>
                                         <br>
                                     </div>
@@ -157,17 +160,27 @@
                         <ul class="messages">
                             <li>
                                 @foreach ($komen as $k)
-                                <!-- <img src="{{asset('/uploads/avatars/'.$k->avatar) }}" class="avatar"
-                                            alt="Avatar"> -->
+                                <img src="{{asset('/uploads/avatars/'.$k->avatar) }}" class="avatar" alt="Avatar">
+                                <div class="message_date">
+
+                                    <h6>{{ date('d M Y')   }}</h6>
+
+                                    <form action="{{ route('komentarctrl.destroy', $k->id)}}" method="POST">
+                                        <button type="submit" class="btn btn-danger btn-xs"><i
+                                                class="fa fa-trash-o"></i>
+                                            {{ method_field('DELETE') }}
+                                            {{csrf_field()}}
+                                        </button>
+                                    </form>
+
+                                </div>
                                 <div class="message_wrapper">
-                                    <h3>{{ $k->nama_user }}</h3>
-                                    <h4>{{ date('d M Y')   }}</h4>
+                                    <h4>{{ $k->nama_user }}</h4>
                                     <blockquote class="message">{{ $k->body }}</blockquote>
                                     <br />
                                 </div>
                                 @endforeach
                             </li>
-
                         </ul>
                         <!-- end of user messages -->
 

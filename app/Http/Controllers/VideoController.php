@@ -63,15 +63,15 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         //$vid = ModelVideo::findOrFail($id)->first();
         
        $vid = ModelVideo::where('id',$id)->first();
-       $komen = ModelKomentar::select('nama_user','nomorinduk','body','avatar')->where('video_id', $id)->get();
-
+       $komen = ModelKomentar::select('id','nama_user','nomorinduk','body','avatar')->where('video_id', $id)->get();
+        $session = Session::get('name');
 
          //  $Key = 'video' . $id;
            //  if (!Session::has($Key)) {
             ModelVideo::where('id', $id)->increment('views',1);
     //Session::put($Key, 1);
              //}
-        return view('templates.tontonvideo')->with(compact('vid', $vid, 'komen', $komen));
+        return view('templates.tontonvideo')->with(compact('vid', $vid, 'komen', $komen,'session',$session));
     }
 
     
@@ -81,7 +81,7 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         //$vid = ModelVideo::findOrFail($id)->first();
         
        $vid = ModelVideo::where('id',$id)->first();
-       $komen = ModelKomentar::select('nama_user','nomorinduk','body','avatar')->where('video_id', $id)->get();
+       $komen = ModelKomentar::select('id','nama_user','nomorinduk','body','avatar')->where('video_id', $id)->get();
 
 
          //  $Key = 'video' . $id;
@@ -129,17 +129,6 @@ public function __construct(ModelUploadVideo $upload, ModelVideo $video){
         $vid = ModelVideo::get()->where('nomorinduk', Session::get('nomorinduk'));
         return view('templates.gallery')->with(compact('vid'));
     }
-
-    public function galleryAdmin(){
-        $vid = ModelVideo::get()->where('nomorinduk', Session::get('nomorinduk'));
-        return view('admin.galleryadmin')->with(compact('vid'));
-    }
-
-    //public function tontonvideo($id){
-       // $vid=  ModelVideo::get();
-      //  $vid = ModelVideo::get()->where('id',$id);
-        //return view('templates.tontonvideo')->with('vid', $vid);
-    //}
     
     public function agama(Request $request){
         // $vid=  ModelVideo::get();

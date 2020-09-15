@@ -31,7 +31,8 @@
         <div class="login_wrapper">
             <div class="animate form login_form">
                 <section class="login_content">
-                    <h1>Login</h1>
+                    <h1 style="color:white; font-size:50px;"> JB VIDEO'S</H1>
+                    <h1 style="color:white;">Login</h1>
                     <div>
                         @if(\Session::has('alert'))
                         <div class="alert alert-danger">
@@ -55,15 +56,12 @@
                             </div>
                             <br>
                             <div>
-                                <button type="submit" class="btn btn-default submit">Login</button>
+                                <button type="submit" class="btn btn-secondary">Login</button>
                             </div>
                         </form>
                         <div class="clearfix"></div>
                         <br>
                         <div class="separator">
-                            <p class="change_link">Belum Punya Akun?
-                                <a href="#signup" class="to_register"> Buat Akun </a>
-                            </p>
                             <p class="change_link">login
                                 <a href="/loginAdmin">admin</a>
                             </p>
@@ -72,76 +70,13 @@
                             <br />
 
                             <div>
-                                <h1>SMA Kolese De Britto Yogyakarta</h1>
+                                <h1 style="color:white; font-size:25px;">SMA Kolese De Britto Yogyakarta</h1>
                             </div>
                         </div>
                 </section>
             </div>
 
-            <div id="register" class="animate form registration_form">
-                <section class="login_content">
 
-                    <h1>Verifikasi Nomor Induk</h1>
-                    @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
-                    <div class="row">
-                        <div class="column">
-                            <div class="card">
-                                <form action="{{ url('/cekNIS') }}" method="post">
-
-                                    {{ csrf_field() }}
-                                    <h1>Verifikasi Siswa</h1>
-                                    <div>
-                                        <input type="text" class="form-control" placeholder="Nomor Induk Siswa" id="NIS"
-                                            name="NIS" />
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="btn btn-default submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="column">
-                            <div class="card">
-                                <form action="{{ url('/cekNIP') }}" method="post">
-
-                                    {{ csrf_field() }}
-                                    <h1>Verifikasi Guru</h1>
-                                    <div>
-                                        <input type="text" class="form-control" placeholder="Nomor Induk Pegawai"
-                                            id="NIP" name="NIP" />
-                                    </div>
-                                    <div>
-                                        <button type="submit" class="btn btn-default submit">Submit</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    <br><br>
-                    <div class="separator">
-                        <p class="change_link">Sudah Punya Akun ?
-                            <a href="#signin" class="to_register"> Log in </a>
-                        </p>
-
-                        <div class="clearfix"></div>
-                        <br />
-
-                        <div>
-                            <h1>SMA Kolese De Britto Yogyakarta</h1>
-                        </div>
-                    </div>
-
-                </section>
-            </div>
         </div>
     </div>
 </body>

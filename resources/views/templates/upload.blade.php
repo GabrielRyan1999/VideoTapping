@@ -57,7 +57,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
@@ -109,7 +109,7 @@
                 <div class="">
                     <div class="page-title">
                         <div class="title_left">
-                            <h3>Form Upload </h3>
+                            <h3>Form Upload Video</h3>
                         </div>
                     </div>
 
@@ -123,15 +123,17 @@
                                     <div class="clearfix"></div>
                                 </div>
                                 <div class="x_content">
-                                    <h6>Pilih Mata Pelajaran lalu Masukan Judul Video dan Deskripsi Video, Setelah itu
+                                    <h6>Pilih Kategori lalu Masukan Judul Video dan Deskripsi Video, Setelah itu
                                         pilih File Video Anda dan juga pilih Thumbnail Anda.</h6>
                                     <br>
                                     <form action="{{url ('/upload/proses') }}" method="POST"
                                         enctype="multipart/form-data">
                                         {{ csrf_field() }}
                                         {{ method_field('PUT') }}
-                                        <label for="mapel">Mata Pelajaran:</label>
+                                        <label for="mapel">Daftar Kategori:</label>
                                         <select name="mapel" id="mapel">
+
+                                            <option value="" selected disabled hidden>Choose here</option>
                                             @foreach($mapel as $mata)
                                             <option value="{{$mata->namamatapelajaran}}">{{$mata->namamatapelajaran}}
                                             </option>
@@ -166,25 +168,6 @@
                                     </div>
                                     @endif
 
-                                    <!--<form action="/upload/proses" class="dropzone" name="video" id="video" method="POST">
-                            <label for="mapel">Mata Pelajaran:</label>
-                      <select name="mapel" id="mapel">
-                        <option value="agama">Agama</option>
-                        <option value="antropologi">Antropologi</option>
-                        <option value="indonesia">Bahasa Indonesia</option>
-                        <option value="inggris">Bahasa Inggris</option>
-                        <option value="bk">Bimbingan Konseling</option>
-                        <option value="ekonomi">Ekonomi</option>
-                        <option value="fisika">Fisika</option>
-                        <option value="geografi">Geografi</option>
-                        <option value="jerman">Jerman</option>
-                        <option value="kimia">Kimia</option>
-                        <option value="mandarin">Mandarin</option>
-                        <option value="matematika">Matematika</option>
-                      </select>
-                      <br><br> 
-                    <a class="btn btn-success" style="margin-left: 50%" href="/gallery"><i class="fa fa-edit m-right-xs"></i>Upload</a>
-                    </form>-->
                                 </div>
 
                             </div>
@@ -197,7 +180,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    SMA Kolese DeBritto Yogyakarta</a>
+                    SMA Kolese De Britto Yogyakarta</a>
                 </div>
                 <div class="clearfix"></div>
             </footer>

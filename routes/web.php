@@ -13,6 +13,9 @@
 
 Route::get('/home', 'User@home')->middleware('cekLogin');
 
+Route::get('/testvideo', function(){
+    return view('templates.mapel.testvideo');
+});
 
 Route::get('/gallery', 'VideoController@gallery')->middleware('cekLogin');
 
@@ -46,10 +49,9 @@ Route::get('/tontonvideo', function(){
 Route::get('/cari', function(){
     return view('templates.cari');
  });
-Route::get('/search','UploadVideoController@search');
+Route::get('/search','UploadVideoController@search')->middleware('cekLogin');
 
 Route::get('/destroyAll','User@destroyAll');
-
 Route::get('/searchAdmin','UploadVideoController@searchAdmin');
 //Route::get('/profile', 'User@show_profile');
 
@@ -75,7 +77,7 @@ Route::resource('mapelctrl','MataPelajaranController');
 
 Route::put('/inputmapel','MataPelajaranController@store')->middleware('cekLogin');
 
-Route::get('/tontonvideo/{id}','VideoController@tontonvideo');
+Route::get('/tontonvideo/{id}','VideoController@tontonvideo')->middleware('cekLogin');
 
 Route::get('/loginUser', 'User@loginUser');
 Route::post('/loginUserPost', 'User@loginUserPost')->name('login');
@@ -95,21 +97,9 @@ Route::get('/mapeladmin/{namamatapelajaran}', 'MataPelajaranController@showAdmin
 
 Route::get('/tontonAdmin/{id}', 'VideoController@showAdmin')->middleware('cekLogin');
 
-Route::get('/addcourse', function(){
-   return view('admin.addcourse');
-});
-Route::get('/uploadadmin', function(){
-   return view('admin.uploadAdmin');
-});
-Route::get('/galleryadmin', function(){
-   return view('admin.galleryAdmin');
-});
-Route::get('/profileadmin', function(){
-   return view('admin.profileAdmin');
-});
-Route::get('/tontonvideoadmin', function(){
-   return view('admin.tontonvideoAdmin');
-});
+Route::get('/addcourse', 'User@addcourse')->middleware('cekLogin');
+
+Route::get('/tontonvideoadmin', 'User@tontonvideoadmin')->middleware('cekLogin');
 
 Route::get('/import', 'User@import_view')->middleware('cekLogin');
 Route::post('/import_excel', 'User@import_excel');
@@ -122,23 +112,13 @@ Route::get('/upload','UploadVideoController@upload_vid');
 Route::put('/upload/proses','UploadVideoController@proses');
 
 //Route::get('/editpassuser','NomorIndukController@updateUser');
-Route::put('/updateUser/{id}','User@passUser');
+Route::put('/updateUser/{id}','User@passUser')->middleware('cekLogin');
 //Route::put('/komentar/simpanKomentar','KomentarController@simpanKomentar');
 Route::post('/simpanKomentar/{id}', 'KomentarController@simpanKomentar');
 //Route::post('/user/updatepass','User@updatePass');
 Auth::routes();
 
 //Route::get('/home', 'HomeController@index')->name('home');
-
-Route::get('/register', 'User@Register');
-Route::get('/registerguru', 'User@RegisterGuru');
-Route::post('/registerPost', 'User@RegisterPost');
-Route::post('/cekNIS', 'NomorIndukController@cekNIS');
-Route::post('/cekNIP', 'NomorIndukController@cekNIP');
-
-Route::get('/post/{id}/islikedbyme', 'VideoController@isLikedByMe');
-Route::post('/post/like', 'VideoController@like');
-
 //Route::post('/deleteUser', 'User@deleteUser');
 
 Route::get('/reply/like/{id}', 'VideoController@like');

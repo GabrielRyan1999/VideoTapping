@@ -16,9 +16,9 @@ class CreateKomentarTable extends Migration
         Schema::create('Komentar', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('video_id');
-            $table->integer('user_id');
+            $table->string('user_id');
             $table->string('nama_user');
-            $table->integer('nomorinduk');
+            $table->string('nomorinduk');
             $table->text('body');
             $table->string('avatar');
             $table->timestamps();

@@ -55,7 +55,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultadmin">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultadmin">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Admin Page <span
@@ -69,117 +69,110 @@
                     </div>
                     <!-- /sidebar menu -->
                 </div>
-
-                <!-- top navigation -->
-                <div class="top_nav">
-                    <div class="nav_menu">
-                        <div class="nav toggle">
-                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-                        </div>
-                        <nav class="nav navbar-nav">
-                            <ul class=" navbar-right">
-                                <li class="nav-item dropdown open" style="padding-left: 15px;">
-                                    <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
-                                        id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
-                                        {{ Session::get('name')}}</a>
-                                    <div class="dropdown-menu dropdown-usermenu pull-right"
-                                        aria-labelledby="navbarDropdown">
-                                        <a class="dropdown-item" href="/profileadmin"> Profile</a>
-                                        <a class="dropdown-item" href="/logout"><i
-                                                class="fa fa-sign-out pull-right"></i>
-                                            Log
-                                            Out</a>
-                                    </div>
-                                </li>
-                    </div>
-                </div>
-                <!-- /top navigation -->
-
-                <!-- page content -->
-                <div class="right_col" role="main">
-                    <div class="">
-                        <div class="page-title">
-                            <div class="title_left">
-                                <h3>Edit Password User</h3>
-                            </div>
-
-                        </div>
-
-                        <div class="clearfix"></div>
-
-                        <div class="row">
-                            <div class="col-md-12 col-sm-12 ">
-
-                                <div class="form-group">
-                                    <label class="col-form-label">ID User</label>
-                                    <input type="text" name="modal-input-id" class="form-control"
-                                        value="{{$newpass->id}}" READONLY>
-
-                                </div>
-
-
-                                <div class="form-group">
-                                    <label class="col-form-label">Nama</label>
-                                    <input type="text" name="modal-input-name" class="form-control"
-                                        value="{{$newpass->name}}" READONLY>
-
-                                </div>
-
-
-                                <form action="{{ route('noindukctrl.show', $newpass->id)}}" method="POST"
-                                    enctype="multipart/form-data">
-                                    {{ csrf_field() }}
-                                    {{ method_field('PUT') }}
-                                    <div class="form-group">
-                                        <label class="col-form-label">Password Baru</label>
-                                        <input type="password" class="form-control" placeholder="Password Baru"
-                                            id="password" name="password" />
-                                    </div>
-                                    <br>
-                                    <button type="submit" class="pull-right btn btn-sm btn-primary">
-                                        UPDATE
-                                    </button>
-
-
-                                </form>
-
-
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /page content -->
-
-                <!-- footer content -->
-                <footer>
-                    <div class="pull-right">
-                        SMA Kolese De Britto Yogyakarta</a>
-                    </div>
-                    <div class="clearfix"></div>
-                </footer>
-                <!-- /footer content -->
             </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                            <li class="nav-item dropdown open" style="padding-left: 15px;">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" aria-haspopup="true"
+                                    id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
+                                    {{ Session::get('name')}}</a>
+                                <div class="dropdown-menu dropdown-usermenu pull-right"
+                                    aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/profileadmin"> Profile</a>
+                                    <a class="dropdown-item" href="/logout"><i class="fa fa-sign-out pull-right"></i>
+                                        Log
+                                        Out</a>
+                                </div>
+                            </li>
+                </div>
+            </div>
+            <!-- /top navigation -->
+
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+                    <div class="page-title">
+                        <div class="title_left">
+                            <h3>Edit Password User</h3>
+                        </div>
+
+                    </div>
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        <div class="col-md-12 col-sm-12 ">
+
+                            <div class="form-group">
+                                <label class="col-form-label">Nama</label>
+                                <input type="text" name="modal-input-name" class="form-control"
+                                    value="{{$newpass->name}}" READONLY>
+
+                            </div>
+
+
+                            <form action="{{ route('noindukctrl.show', $newpass->id)}}" method="POST"
+                                enctype="multipart/form-data">
+                                {{ csrf_field() }}
+                                {{ method_field('PUT') }}
+                                <div class="form-group">
+                                    <label class="col-form-label">Password Baru</label>
+                                    <input type="password" class="form-control" placeholder="Password Baru"
+                                        id="password" name="password" />
+                                </div>
+                                <br>
+                                <button type="submit" class="pull-right btn btn-sm btn-primary">
+                                    UPDATE
+                                </button>
+
+
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /page content -->
+
+            <!-- footer content -->
+            <footer>
+                <div class="pull-right">
+                    SMA Kolese De Britto Yogyakarta</a>
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
         </div>
+    </div>
 
-        <!-- jQuery -->
-        <script src="{{asset ('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
-        <!-- Bootstrap -->
-        <script src="{{asset ('assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
-        <!-- FastClick -->
-        <script src="{{asset ('assets/vendors/fastclick/lib/fastclick.js') }}"></script>
-        <!-- NProgress -->
-        <script src="{{asset ('assets/vendors/nprogress/nprogress.js') }}"></script>
-        <!-- morris.js -->
-        <script src="{{asset ('assets/vendors/raphael/raphael.min.js') }}"></script>
-        <script src="{{asset ('assets/vendors/morris.js/morris.min.js') }}"></script>
-        <!-- bootstrap-progressbar -->
-        <script src="{{asset ('assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
-        <!-- bootstrap-daterangepicker -->
-        <script src="{{asset ('assets/vendors/moment/min/moment.min.js') }}"></script>
-        <script src="{{asset ('assets/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{asset ('assets/vendors/jquery/dist/jquery.min.js') }}"></script>
+    <!-- Bootstrap -->
+    <script src="{{asset ('assets/vendors/bootstrap/dist/js/bootstrap.bundle.min.js') }}"></script>
+    <!-- FastClick -->
+    <script src="{{asset ('assets/vendors/fastclick/lib/fastclick.js') }}"></script>
+    <!-- NProgress -->
+    <script src="{{asset ('assets/vendors/nprogress/nprogress.js') }}"></script>
+    <!-- morris.js -->
+    <script src="{{asset ('assets/vendors/raphael/raphael.min.js') }}"></script>
+    <script src="{{asset ('assets/vendors/morris.js/morris.min.js') }}"></script>
+    <!-- bootstrap-progressbar -->
+    <script src="{{asset ('assets/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js') }}"></script>
+    <!-- bootstrap-daterangepicker -->
+    <script src="{{asset ('assets/vendors/moment/min/moment.min.js') }}"></script>
+    <script src="{{asset ('assets/vendors/bootstrap-daterangepicker/daterangepicker.js') }}"></script>
 
-        <!-- Custom Theme Scripts -->
-        <script src="{{asset ('assets/js/custom.min.js') }}"></script>
+    <!-- Custom Theme Scripts -->
+    <script src="{{asset ('assets/js/custom.min.js') }}"></script>
 
 </body>
 

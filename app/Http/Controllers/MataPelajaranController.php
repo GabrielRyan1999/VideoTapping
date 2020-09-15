@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\ModelVideo;
 use Image;
 use App\ModelMataPelajaran;
-
+use App\ModelUploadVideo;
 class MataPelajaranController extends Controller
 {
     /**
@@ -132,7 +132,9 @@ class MataPelajaranController extends Controller
     public function destroy($namamatapelajaran)
     {
         //
+        ModelUploadVideo::where('mapel',$namamatapelajaran)->delete();
         ModelMataPelajaran::where('namamatapelajaran',$namamatapelajaran)->delete();
+         ModelVideo::where('mapel',$namamatapelajaran)->delete();
         return redirect()->back();
     }
 

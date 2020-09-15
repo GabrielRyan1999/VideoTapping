@@ -56,7 +56,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
@@ -114,14 +114,6 @@
 
                     <div class="row">
                         <div class="col-md-12 col-sm-12 ">
-
-                            <div class="form-group">
-                                <label class="col-form-label">ID User</label>
-                                <input type="text" name="modal-input-id" class="form-control" value="{{$pass->id}}"
-                                    READONLY>
-
-                            </div>
-
 
                             <div class="form-group">
                                 <label class="col-form-label">Nama</label>

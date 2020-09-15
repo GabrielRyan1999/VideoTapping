@@ -48,7 +48,7 @@ class User extends Controller
         $admin="admin";
           $dataadmin = ModelUser::where('nomorinduk', $admin)->first();
         if ($dataadmin) { //apakah Nomor Induk admin tersebut ada atau tidak
-            if ($password===$admin) {
+            if ($password===$dataadmin->password) {
                 Session::put('id', $dataadmin->id);
                 Session::put('name', $dataadmin->name);
                 
@@ -157,7 +157,7 @@ class User extends Controller
         $usrs = ModelUser::findOrFail($id);
         if ($request->hasFile('avatar')) {
             $this->validate($request, [
-                'avatar' => 'required|file|image|mimes:jpeg,png,jpg|max:2048',
+                'avatar' => 'required|file|image|mimes:jpeg,png,jpg',
             ]);
             $avatar = $request->file('avatar');
             $filename = time() . "_" . $avatar->getClientOriginalName();
@@ -169,15 +169,8 @@ class User extends Controller
             
             ModelKomentar::where('user_id', $id)->update(['avatar' => $filename]);
             Session::put('avatar', $usrs->avatar);
-            // ModelUser::create(['avatar' => $filename]);
-            //Image::make($avatar)->resize(300,300)->save(public_path('/uploads/avatars' . $filename));
-            //$filename = time() . '.' . $avatar->getClientOriginalExtension();
-            //$user = Auth::User();
-            // $user->avatar = $filename;
-            // $user->save();
         }
 
-        //return view('templates.profile',array('user'=>Auth::user()));
         return redirect('/profile');
     }
     public function showData()
@@ -211,7 +204,7 @@ class User extends Controller
 
       $passnew=ModelUser::where('id', $id)->update(['password' => $passbaru]);
       
-       return redirect('/profile');
+       return redirect('/profile')->with('success-password', 'Password Berhasil diubah!');;
     }
 
     public function import_view(){
@@ -255,4 +248,13 @@ public function home(){
 
         return view('templates.default');
 } 
+
+public function addcourse(){
+
+        return view('admin.addcourse');
+} 
+
+public function tontonvideoadmin(){
+    return view('admin.tontonvideoAdmin');
+}
 }

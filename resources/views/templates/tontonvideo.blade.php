@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{asset ('assets/images/logo.png')}}" type="image" />
-    <title>SMA Kolese DeBritto Yogyakarta</title>
+    <title>SMA Kolese De Britto Yogyakarta</title>
 
     <!-- Bootstrap -->
     <link href="{{asset ('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -20,6 +20,9 @@
 
     <!-- Custom styling plus plugins -->
     <link href="{{asset ('assets/css/custom.min.css') }}" rel="stylesheet">
+
+    <link href="https://vjs.zencdn.net/7.8.4/video-js.css" rel="stylesheet" />
+    <script src="https://vjs.zencdn.net/ie8/1.1.2/videojs-ie8.min.js"></script>
 </head>
 
 <body class="nav-md">
@@ -55,7 +58,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
@@ -66,7 +69,6 @@
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -122,32 +124,35 @@
                                         <div class="x_content">
 
                                             <div class="col-md-12 col-sm-12 ">
-                                                <div id='videoplayer'>
-                                                    <video width="80%" controlsList="nodownload" controls autoplay
-                                                        class=”afterglow” id="myvideo" width="1280" height="720">
-                                                        <source src="{{asset('/assets/videos/'.$vid->judulvideo) }}"
-                                                            type="video/mp4">
-                                                    </video>
+
+                                                <video id="my-Video" class="video-js" controlsList="nodownload" controls
+                                                    autoplay width="1280" height="720" data-setup="{}">
+                                                    <source src="{{asset('/assets/videos/'.$vid->judulvideo) }}"
+                                                        type="video/mp4">
+                                                </video>
+
+                                                <div class="separator">
                                                     <h3>{{ $vid->title }}</h3>
 
-                                                    <h4>{{ $vid->views}} Views </h4>
+                                                    <h4>Pengupload : {{ $vid->username}}</h4>
+                                                    <h4>Kategori : {{ $vid->mapel}}</h4>
 
+                                                    <h4>Deskripsi Video : {{ $vid->deskripsi }}</h4>
+
+                                                    <h4>{{ $vid->views}} Views </h4>
                                                 </div>
-                                            </div>
-                                            <div class="separator">
-                                                <h4>{{ $vid->deskripsi }}</h4>
                                             </div>
                                             <br>
                                         </div>
+                                    </form>
                                 </div>
 
                             </div>
-                            </form>
                         </div>
                         <form action="{{url('simpanKomentar', $vid->id)}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div>
-                                <input type="text" class="form-control" placeholder="Apa Komentar Anda?" id="komentar"
+                                <input type="text" class="form-control" placeholder="Komentar..." id="komentar"
                                     name="komentar" />
                             </div><br><br>
 
@@ -164,6 +169,23 @@
                                     <div class="message_date">
 
                                         <h6>{{ date('d M Y')   }}</h6>
+
+                                        @if($k->nomorinduk == Session::get('nomorinduk'))
+
+
+                                        <form action="{{ route('komentarctrl.destroy', $k->id)}}" method="POST">
+                                            <button type="submit" class="btn btn-danger btn-xs"><i
+                                                    class="fa fa-trash-o"></i>
+                                                {{ method_field('DELETE') }}
+                                                {{csrf_field()}}
+                                            </button>
+
+                                        </form>
+                                        @else
+
+                                        @endif
+
+
                                     </div>
                                     <div class="message_wrapper">
                                         <h4>{{ $k->nama_user }}</h4>
@@ -194,7 +216,7 @@
         </footer>
         <!-- /footer content -->
     </div>
-    </div>
+
 
 
     <!-- jQuery -->
@@ -231,6 +253,8 @@
 
     });
     </script>
+
+    <script src="https://vjs.zencdn.net/7.8.4/video.js"></script>
 </body>
 
 </html>

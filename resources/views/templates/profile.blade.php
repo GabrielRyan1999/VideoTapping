@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{asset ('assets/images/logo.png')}}" type="image" />
-    <title>SMA Kolese DeBritto Yogyakarta</title>
+    <title>SMA Kolese De Britto Yogyakarta</title>
 
     <!-- Bootstrap -->
     <link href="{{asset ('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -55,7 +55,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
@@ -132,6 +132,15 @@
 
                                         </div>
                                         <div class="col-md-9 col-sm-9 ">
+
+                                            @if(\Session::has('success-password'))
+                                            <div class="alert alert-success">
+                                                <div>
+                                                    <h2 style="text-align:center;">{{Session::get('success-password')}}
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                            @endif
                                             <form>
                                                 <h1 style="text-align:center;">Profile Anda</h1>
                                                 <br><br>
@@ -169,7 +178,7 @@
             <!-- footer content -->
             <footer>
                 <div class="pull-right">
-                    SMA Kolese DeBritto Yogyakarta</a>
+                    SMA Kolese De Britto Yogyakarta</a>
                 </div>
                 <div class="clearfix"></div>
             </footer>

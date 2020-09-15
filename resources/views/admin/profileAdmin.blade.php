@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="{{asset ('assets/images/logo.png')}}" type="image" />
-    <title>SMA Kolese DeBritto Yogyakarta</title>
+    <title>SMA Kolese De Britto Yogyakarta</title>
 
     <!-- Bootstrap -->
     <link href="{{asset ('assets/vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">

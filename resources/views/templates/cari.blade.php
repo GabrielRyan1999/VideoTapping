@@ -55,7 +55,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultUser">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultUser">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Upload <span class="fa fa-chevron-down"></span></a>
@@ -66,7 +66,6 @@
                                 <li><a><i class="fa fa-desktop"></i> Media <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
                                         <li><a href="/gallery">Video Gallery</a></li>
-                                        <li><a href="/calendar">Calendar</a></li>
                                     </ul>
                                 </li>
                         </div>
@@ -150,6 +149,8 @@
                                                     type="video/mp4">
                                             </video>
                                             <div class="caption">
+
+                                                <h5 style="text-align:center;">Video Kategori {{ $video->mapel }}</h5>
                                                 <form action="{{ route('videoajactrl.show', $video->id) }}">
                                                     <button type="submit" class="btn btn-info">
 

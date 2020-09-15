@@ -48,7 +48,7 @@ class NomorIndukController extends Controller
        $passbaru=$request->password;
       $passnew=ModelUser::where('id', $id)->update(['password' => $passbaru]);
       
-       return redirect('/edit');
+       return redirect('/edit')->with('success-password', 'Password Berhasil diubah!');
     }
 
     public function store(request $request){

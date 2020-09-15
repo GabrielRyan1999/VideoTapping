@@ -51,13 +51,6 @@ public function proses(Request $request){
       $video = $request->file('input_video');
      
       $thumb = $request->file('thumbnail');
-      $thumbname = $thumb->getClientOriginalName();
-      $thumbext = $thumb->getClientOriginalExtension();
-      $thumbjudul= $thumbname.'.'.$thumbext;
-      
-      $image_resize = Image::make($thumb->getRealPath());   
-      $image_resize->resize(1280, 720);
-      $image_resize->save(public_path('assets/thumbnail' .$thumbname));
 
       $test = new ModelUploadVideo();
       $test->mapel=$mapel;
@@ -70,24 +63,35 @@ public function proses(Request $request){
       $coba->username=$username;
       $coba->status=$status;
       $coba->mapel=$mapel;
-      $coba->thumbnail=$thumbname;
 
-      if(is_null($title) || is_null($video)){
+      if(is_null($mapel)|| is_null($title) || is_null($video)|| is_null($thumb)){
         return redirect()->back()->with('alert-title', "Lengkapi Data");
       }else{
       $size=$video->getSize();
       $videoname = $video->getClientOriginalName();
       $extension = $video->getClientOriginalExtension();
       $judul = $title.'.'.$extension;
-      //$video->save(public_path('/assets/videos' . $videoname));
       $video->move(public_path('/assets/videos'), $judul);
+      
+      
+      $thumbname = $thumb->getClientOriginalName();
+      $thumbext = $thumb->getClientOriginalExtension();
+      $thumbjudul= $thumbname.'.'.$thumbext;
+      
+      $image_resize = Image::make($thumb->getRealPath());   
+      $image_resize->resize(1280, 720);
+      $image_resize->save(public_path('assets/thumbnail' .$thumbname));
+      $image_resize = Image::make($thumb->getRealPath());   
+      $image_resize->resize(1280, 720);
+      $image_resize->save(public_path('assets/thumbnail' .$thumbname));
 
+      
       $test->video=$videoname;
        $coba->judulvideo=$judul;    
       $coba->format=$extension;
       $coba->deskripsi=$deskripsi;
       $coba->sizevideo=$size;
-
+      $coba->thumbnail=$thumbname;
          $coba->title=$title;
          $test->save();
       $coba->save();
@@ -101,7 +105,7 @@ public function proses(Request $request){
     //}
     //$video = ModelUploadVideo::get();
     //return view('upload',['video' => $video]);
-    return redirect('/gallery')->with('success', 'Images Video Successfully');
+    return redirect('/gallery')->with('success', 'Videos Video Successfully');
   }
 
 }

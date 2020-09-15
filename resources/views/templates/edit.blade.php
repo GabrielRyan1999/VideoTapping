@@ -67,7 +67,7 @@
                             <ul class="nav side-menu">
                                 <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
-                                        <li><a href="/defaultadmin">Mata Pelajaran</a></li>
+                                        <li><a href="/defaultadmin">Daftar Kategori</a></li>
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-edit"></i> Admin Page <span
@@ -137,6 +137,14 @@
 
                 <!-- /page content -->
 
+                @if(\Session::has('success-password'))
+                <div class="alert alert-success">
+                    <div>
+                        <h2 style="text-align:center;">{{Session::get('success-password')}}
+                        </h2>
+                    </div>
+                </div>
+                @endif
                 <!-- start project list -->
                 <table class="table table-striped projects" id="table">
                     <thead>
